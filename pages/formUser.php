@@ -1,4 +1,5 @@
 <?php
+include_once('mensagens.php');
 if (!empty($_POST)) {
     $nome = trim($_POST["nome"]);
     $email = trim($_POST["email"]);
@@ -32,9 +33,11 @@ if (!empty($_POST)) {
     //Cadastro do Usuario
     $salvo = mysqli_query($conn, htmlspecialchars($sqlUser)) or die(mysqli_error($conn));
     if ($salvo){
-        echo "<div class='alert alert-success'> Salvo </div>";
+        //echo "<div class='alert alert-success'> Salvo </div>";
+        aviso("Salvo");
     } else {
-        echo "<div class='alert alert-danger'> Erro ao salvar! </div>";
+        //echo "<div class='alert alert-danger'> Erro ao salvar! </div>";
+        erro("Erro ao Salvar");
     }
 
     mysqli_close($conn);
