@@ -1,5 +1,4 @@
 <?php
-
 if (!empty($_POST)) {
     $nome = trim($_POST["nome"]);
     $email = trim($_POST["email"]);
@@ -11,8 +10,8 @@ if (!empty($_POST)) {
     $logradouro = trim($_POST["logradouro"]);
     $bairro = trim($_POST["bairro"]);
     $cidade = trim($_POST["cidade"]);
-    $uf = trim($_POST["uf"]);
-
+    $uf = trim($_POST["uf"]); 
+    
     $sql = "insert into endereco (cep, logradouro, bairro, cidade, uf) values ('$cep' , '$logradouro', '$bairro', '$cidade', '$uf')";
 
     $sqlUser = "insert into usuario (nome, email, tel, numero, complemento, senha, cep) values ('$nome', '$email', '$tel', '$numero', '$complemento', '$senha', '$cep')";
@@ -25,7 +24,8 @@ if (!empty($_POST)) {
 
     //Busca do CEP - Endereco
     $result = mysqli_query($conn, htmlspecialchars($sqlCep)) or die(mysqli_error($conn));
-    if (!$result) {
+     
+    if (mysqli_num_rows($result) == 0) {
         //Cadastro do CEP - Endereco
         mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
     }

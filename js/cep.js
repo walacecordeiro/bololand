@@ -5,7 +5,7 @@ function limpa_formulario_cep() {
     document.getElementById('cidade').value = ("");
     document.getElementById('uf').value = ("");
     //document.getElementById('ibge').value = ("");
-    libera_formulario_cep();
+    //libera_formulario_cep();
 }
 
 function meu_callback(conteudo) {
@@ -16,11 +16,11 @@ function meu_callback(conteudo) {
         document.getElementById('cidade').value = (conteudo.localidade);
         document.getElementById('uf').value = (conteudo.uf);
         //document.getElementById('ibge').value = (conteudo.ibge);
-        trava_formulario_cep();
+        //trava_formulario_cep();
     } //end if.
     else {
         //CEP não Encontrado.
-        limpa_formulario_cep();
+        //limpa_formulario_cep();
         alert("CEP não encontrado.");
     }
 }
@@ -68,7 +68,7 @@ function pesquisacep(valor) {
     }
 };
 
-function trava_formulario_cep() {  
+function trava_formulario_cep() {
     document.getElementById('rua').disabled = true;
     document.getElementById('bairro').disabled = true;
     document.getElementById('cidade').disabled = true;
