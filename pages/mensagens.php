@@ -1,18 +1,13 @@
 <style>
-.aviso{
-    position: absolute;
-    top: 25%;
-    left: 25%;
-    width: 50%;
-    min-width: 320px;
-    
-}
-
+    .aviso {
+        position: absolute;
+        top: 25%;
+        left: 25%;
+        width: 50%;
+        min-width: 320px;
+    }
 </style>
-
-
 <?php
-
 function aviso($msg)
 {
     echo "

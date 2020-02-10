@@ -50,11 +50,11 @@ if (!empty($_POST)) {
     <form method="post" action="index.php?pag=cad">
         <div class="form-group">
             <label>Nome</label>
-            <input type="text" class="form-control" name="nome">
+            <input type="text" class="form-control" name="nome" required>
         </div>
         <div class="form-group">
             <label>E-mail</label>
-            <input type="email" class="form-control" name="email">
+            <input type="email" class="form-control" name="email" required>
         </div>
         <div class="form-group">
             <label>Telefone</label>
@@ -71,7 +71,7 @@ if (!empty($_POST)) {
 
         <div class="form-group">
             <label>CEP</label>
-            <input type="text" class="form-control" name="cep" maxlength="9" id="cep" onblur="pesquisacep(this.value);">
+            <input type="text" class="form-control" name="cep" maxlength="9" id="cep" onblur="pesquisacep(this.value);" required>
         </div>
         <div class="form-group">
             <label>Endereço</label>
