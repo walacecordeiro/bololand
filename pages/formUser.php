@@ -18,9 +18,9 @@ if (!empty($_POST)) {
     $sqlUser = "insert into usuario (nome, email, tel, numero, complemento, senha, cep) values ('$nome', '$email', '$tel', '$numero', '$complemento', '$senha', '$cep')";
 
     $sqlCep = "select cep from endereco where cep = $cep";
-
+    
     //Conecta o banco de dados
-    $conn = mysqli_connect("localhost", "root", "", "bololand");
+    $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
     mysqli_set_charset($conn, "utf8");
 
     //Busca do CEP - Endereco
@@ -72,7 +72,7 @@ if (!empty($_POST)) {
         </div>
         <div class="form-group">
             <label>Endereço</label>
-            <input type="text" class="form-control" name="logradouro" maxlength="150" id="rua">
+            <input type="text" class="form-control" name="logradouro" maxlength="100" id="rua">
         </div>
         <div class="form-group">
             <label>Bairro</label>
