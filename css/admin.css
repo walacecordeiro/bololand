@@ -14,11 +14,16 @@ body {
     height: 100%;
     display: block;
     transition: all 0.5s ease-in;
+    overflow: auto;
 }
 
 .sidebarHide {
     transition: all 0.5s ease-out;
-    display: none;
+    width: 0;
+}
+
+.sidebar a:hover {
+    background-color: rgb(184, 183, 182);
 }
 
 .main {

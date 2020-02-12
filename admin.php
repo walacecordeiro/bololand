@@ -30,7 +30,7 @@ include_once("config.php");
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#" onclick="side()">
+        <a class="navbar-brand col-sm-3 col-md-2" href="#" onclick="side()">
             <i class="material-icons">
                 menu
             </i>
