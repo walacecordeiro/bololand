@@ -35,7 +35,7 @@ if (!empty($_POST)) {
         //Se o resultado da busca do CEP for igual a 0
         if (mysqli_num_rows($result) == 0) {
             //Cadastro do CEP (Endereco)
-            mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
+            mysqli_query($conn, htmlspecialchars($sqlCep)) or die(mysqli_error($conn));
         }
 
         //Cadastro do Usuario com o CEP
