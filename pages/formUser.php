@@ -48,13 +48,12 @@ if (!empty($_POST)) {
             //echo "<div class='alert alert-danger'> Erro ao salvar! </div>";
             alerta("Erro ao Salvar");
         }
+        //Fecha a conecxão do banco de dados
+        mysqli_close($conn);
     } else {
         //Mosta os $erros da validação
         erro($erros);
     }
-
-    //Fecha a conecxão do banco de dados
-    mysqli_close($conn);
 }
 
 //Funções
