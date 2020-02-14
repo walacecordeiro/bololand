@@ -15,6 +15,17 @@ CREATE TABLE endereco (
     uf varchar(2) DEFAULT NULL
 );
 
+
+CREATE TABLE produto (
+  id_produto int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  nome varchar(100),
+  descricao varchar(200),
+  quant int,
+  valor decimal(12,2),
+  ativo boolean
+)
+
+
 -- Modificar tabelas
 ALTER TABLE usuario
     ADD cep varchar(9),

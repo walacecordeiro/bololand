@@ -56,7 +56,7 @@ include_once("config.php");
                     </h6>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="side()">
+                            <a class="nav-link" href="admin.php?pag=cad" onclick="side()">
                                 Produtos
                             </a>
                         </li>
@@ -76,7 +76,17 @@ include_once("config.php");
             </nav>
 
             <section class="col-12 col-md-10 d-block px-4 main" id="main">
-                <h2>Principal</h2>
+                <?php
+                if (!empty($_GET)) {
+                    if ($_GET["pag"] == "cad") {
+                        include("pages/formProd.php");
+                    } else {
+                        echo "<h2>Gerenciador de Dados</h2>";
+                    }
+                } else {
+                    echo "<h2>Gerenciador de Dados</h2>";
+                }
+                ?>
             </section>
         </div>
 
