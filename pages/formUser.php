@@ -7,7 +7,7 @@ if (!empty($_POST)) {
     $tel = trim($_POST["tel"]);
     $numero = trim($_POST["numero"]);
     $complemento = trim($_POST["complemento"]);
-    $senha = trim($_POST["senha"]);
+    $senha = crypt(trim($_POST["senha"]), $email);
     $confsenha = trim($_POST["confsenha"]);
     $cep = trim($_POST["cep"]);
     $logradouro = trim($_POST["logradouro"]);
@@ -18,7 +18,7 @@ if (!empty($_POST)) {
     //SQL - Comandos do Banco de dados
     $sqlCep = "insert into endereco (cep, logradouro, bairro, cidade, uf) values ('$cep' , '$logradouro', '$bairro', '$cidade', '$uf')";
 
-    $sqlUser = "insert into usuario (nome, email, tel, numero, complemento, senha, cep) values ('$nome', '$email', '$tel', '$numero', '$complemento', '$senha', '$cep')";
+    $sqlUser = "insert into usuario (nome, email, tel, numero, complemento, senha, cep) values ('$nome', '$email', '$tel', '$numero', '$complemento', md5('$senha'), '$cep')";
 
     $sqlBuscaCep = "select cep from endereco where cep = $cep";
 

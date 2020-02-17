@@ -11,7 +11,7 @@ if (!empty($_REQUEST["action"])) {
     switch ($_REQUEST["action"]) {
         case "log":
             $user["email"] = trim($_POST["email"]);
-            $user["senha"] = trim($_POST["pws"]);
+            $user["senha"] = crypt(trim($_POST["pws"]), $user["email"]);
             login($user);
             break;
 
@@ -24,7 +24,7 @@ if (!empty($_REQUEST["action"])) {
 //Functions ----------------------------------------------
 function login($usuario)
 {
-    $sql = "select * from usuario where email = '$usuario[email]' and senha = '$usuario[senha]'";
+    $sql = "select id_user, nome, email from usuario where email = '$usuario[email]' and senha = md5('$usuario[senha]')";
     $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
     mysqli_set_charset($conn, "utf8");
     $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
