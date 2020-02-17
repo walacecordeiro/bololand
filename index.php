@@ -52,30 +52,29 @@ include_once("config.php");
                 if (session_status() !== PHP_SESSION_ACTIVE) {
                     session_start();
                 }
-                if (empty($_SESSION["user"]))
-                { ?>
+                if (empty($_SESSION["user"])) { ?>
 
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?pag=cad">Cadastro</a>
-                    </li>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?pag=cad">Cadastro</a>
+                        </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?pag=log">Entrar</a>
-                    </li>
-                </ul>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?pag=log">Entrar</a>
+                        </li>
+                    </ul>
 
                 <?php } else { ?>
 
                     <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href=""><?=$_SESSION["user"]["nome"]?></a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href=""><?= $_SESSION["user"]["nome"] ?></a>
+                        </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Sair</a>
-                    </li>
-                </ul>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?pag=log&action=off">Sair</a>
+                        </li>
+                    </ul>
 
                 <?php } ?>
             </div>

@@ -7,13 +7,13 @@
     <div class="row justify-content-center">
 
         <form method="post" action="index.php?pag=log" class="col-md-6">
-            <input type="hidden" name="acao" value="log">
+            <input type="hidden" name="action" value="log">
 
             <h2 class="p-3 text-center"> login do cliente</h2>
 
             <div class="form-group py-3">
                 <label for="e-mail">e-mail</label>
-                <input type="email" name="email" class="form-control p-2" value="" placeholder="Ex. paulosilva@email.com">
+                <input type="email" name="email" class="form-control p-2" value="<?=$user['email']?>" placeholder="Ex. paulosilva@email.com">
             </div>
 
             <div class="form-group py-3">
