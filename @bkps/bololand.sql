@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 31-Jan-2020 às 20:58
--- Versão do servidor: 10.4.10-MariaDB
--- versão do PHP: 7.1.33
+-- Tempo de geração: 17-Fev-2020 às 12:24
+-- Versão do servidor: 10.4.11-MariaDB
+-- versão do PHP: 7.2.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -39,6 +39,21 @@ CREATE TABLE `endereco` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `produto`
+--
+
+CREATE TABLE `produto` (
+  `id_produto` int(11) NOT NULL,
+  `nome` varchar(100) DEFAULT NULL,
+  `descricao` varchar(200) DEFAULT NULL,
+  `quant` int(11) DEFAULT NULL,
+  `valor` decimal(12,2) DEFAULT NULL,
+  `ativo` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `usuario`
 --
 
@@ -64,6 +79,12 @@ ALTER TABLE `endereco`
   ADD PRIMARY KEY (`cep`);
 
 --
+-- Índices para tabela `produto`
+--
+ALTER TABLE `produto`
+  ADD PRIMARY KEY (`id_produto`);
+
+--
 -- Índices para tabela `usuario`
 --
 ALTER TABLE `usuario`
@@ -73,6 +94,12 @@ ALTER TABLE `usuario`
 --
 -- AUTO_INCREMENT de tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `produto`
+--
+ALTER TABLE `produto`
+  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
