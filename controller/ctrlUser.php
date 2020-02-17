@@ -22,11 +22,16 @@ function login($usuario)
     mysqli_set_charset($conn, "utf8");
     $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
     if (mysqli_num_rows($result) == 1){
-        //header('Location: index.php');
-        aviso("Usuario encontrado");
+        //aviso("Usuario encontrado");
+
+        if(session_status() !== PHP_SESSION_ACTIVE){
+            session_start();
+        }
+        $_SESSION["user"] = mysqli_fetch_array($result);
+
+        header('Location: index.php');
     } else {
         erro("Usuario não encontrado");
     }
     mysqli_close($conn);
 }
-?>
