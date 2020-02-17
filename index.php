@@ -60,6 +60,7 @@ include_once("config.php");
         </nav>
 
         <?php
+        include_once('pages/mensagens.php');
         if (!empty($_GET)) {
             if ($_GET["pag"] == "cad") {
                 include("pages/formUser.php");

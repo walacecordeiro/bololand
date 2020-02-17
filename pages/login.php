@@ -1,3 +1,8 @@
+<?php
+    //include_once()
+    require_once("./controller/ctrlUser.php");
+?>
+
 <section class="container bg-branco">
     <div class="row justify-content-center">
 
@@ -31,27 +36,3 @@
         </form>
     </div>
 </section>
-
-<?php
-include_once('mensagens.php');
-if (!empty($_POST["acao"])) {
-    $user = $_POST;
-    login(trim($user["email"]), trim($user["pws"]));
-}
-
-//Functions
-function login($email, $senha)
-{
-    $sql = "select * from usuario where email = '$email' and senha = '$senha';";
-    $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
-    mysqli_set_charset($conn, "utf8");
-    $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
-    if (mysqli_num_rows($result) != 0){
-        //header('Location: index.php');
-        aviso("Usuario encontrado");
-    } else {
-        erro("Usuario não encontrado");
-    }
-    mysqli_close($conn);
-}
-?>
