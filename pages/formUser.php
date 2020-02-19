@@ -18,7 +18,7 @@ if (!empty($_POST)) {
     //SQL - Comandos do Banco de dados
     $sqlCep = "insert into endereco (cep, logradouro, bairro, cidade, uf) values ('$cep' , '$logradouro', '$bairro', '$cidade', '$uf')";
 
-    $sqlUser = "insert into usuario (nome, email, tel, numero, complemento, senha, cep) values ('$nome', '$email', '$tel', '$numero', '$complemento', md5('$senha'), '$cep')";
+    $sqlUser = "insert into usuario (nome, email, tel, numero, complemento, senha, cep, tipo) values ('$nome', '$email', '$tel', '$numero', '$complemento', md5('$senha'), '$cep', (select id_tipo from tipo where tipo = 'cliente'))";//ou apenas numero 2 ref. ao id do cliente no banco de dados
 
     $sqlBuscaCep = "select cep from endereco where cep = $cep";
 

@@ -34,3 +34,17 @@ ALTER TABLE usuario
 
 ALTER TABLE usuario
   ADD FOREIGN KEY (cep) REFERENCES endereco(cep);
+
+--Tipo de usuario
+ALTER TABLE usuario
+ADD tipo int;
+
+CREATE TABLE tipo(
+    id_tipo int AUTO_INCREMENT PRIMARY key,
+    tipo varchar(50) not null
+    );
+
+ALTER TABLE usuario
+  ADD FOREIGN KEY (tipo) REFERENCES tipo(id_tipo);
+
+INSERT INTO tipo VALUES(null,"admin"), (null,"cliente");
