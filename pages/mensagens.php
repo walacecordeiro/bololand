@@ -5,6 +5,7 @@
         left: 25%;
         width: 50%;
         min-width: 320px;
+        z-index: 100;
     }
 </style>
 <?php

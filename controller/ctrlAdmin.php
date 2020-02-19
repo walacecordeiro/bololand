@@ -36,7 +36,7 @@ function login($usuario)
         }
         $_SESSION["admin"] = mysqli_fetch_array($result);
 
-        header('Location: index.php');
+        header('Location: admin.php');
     } else {
         erro("Usuario não encontrado");
     }
@@ -52,4 +52,15 @@ function logout()
     session_status() !== PHP_SESSION_ACTIVE ? session_start() : "";
     session_destroy();
     header('Location: index.php');
+}
+
+function getAll(){
+    $sql = "select * from usuario";
+    $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
+    mysqli_set_charset($conn, "utf8");
+    $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
+   
+    mysqli_close($conn);
+    
+    return $result;
 }

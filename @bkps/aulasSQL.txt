@@ -48,3 +48,7 @@ ALTER TABLE usuario
   ADD FOREIGN KEY (tipo) REFERENCES tipo(id_tipo);
 
 INSERT INTO tipo VALUES(null,"admin"), (null,"cliente");
+
+UPDATE usuario 
+SET tipo = 1 
+WHERE id_user=5

@@ -29,72 +29,94 @@ include_once("config.php");
 </script>
 
 <body>
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2" href="#" onclick="side()">
-            <i class="material-icons">
-                menu
-            </i>
-            Bololand
-        </a>
+    <?php
+    include_once("pages/mensagens.php");
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+    if (!empty($_SESSION["admin"])) {
+    ?>
 
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+        <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+            <a class="navbar-brand col-sm-3 col-md-2" href="#" onclick="side()">
+                <i class="material-icons">
+                    menu
+                </i>
+                Bololand
+            </a>
 
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="#">Sair</a>
-            </li>
-        </ul>
-    </nav>
+            <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
 
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-12 col-md-2 bg-light sidebar" id="side">
-                <div class="sidebar-sticky">
+            <ul class="navbar-nav px-3">
+                <li class="nav-item text-nowrap">
+                    <a class="nav-link" href="#">Sair</a>
+                </li>
+            </ul>
+        </nav>
 
-                    <h6 class="sidebar-heading align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Cadastros</span>
-                    </h6>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="admin.php?pag=cad" onclick="side()">
-                                Produtos
-                            </a>
-                        </li>
-                    </ul>
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-12 col-md-2 bg-light sidebar" id="side">
+                    <div class="sidebar-sticky">
 
-                    <h6 class="sidebar-heading align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Relatórios</span>
-                    </h6>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="side()">
-                                Produtos
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+                        <h6 class="sidebar-heading align-items-center px-3 mt-4 mb-1 text-muted">
+                            <span>Cadastros</span>
+                        </h6>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="admin.php?pag=cad" onclick="side()">
+                                    Produtos
+                                </a>
+                            </li>
+                        </ul>
 
-            <section class="col-12 col-md-10 d-block px-4 main" id="main">
-                <?php
-                if (!empty($_GET)) {
-                    if ($_GET["pag"] == "cad") {
-                        include("pages/formProd.php");
+                        <h6 class="sidebar-heading align-items-center px-3 mt-4 mb-1 text-muted">
+                            <span>Relatórios</span>
+                        </h6>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" onclick="side()">
+                                    Produtos
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="admin.php?pag=repUser" onclick="side()">
+                                    Usuario
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <section class="col-12 col-md-10 d-block px-4 main" id="main">
+                    <?php
+                    if (!empty($_GET)) {
+                        if ($_GET["pag"] == "cad") {
+                            include("pages/formProd.php");
+                        } else if ($_GET["pag"] == "repUser") {
+                            include("pages/reportUser.php");
+                        } else{
+                            echo "<h2>Gerenciador de Dados</h2>";
+                        }
                     } else {
                         echo "<h2>Gerenciador de Dados</h2>";
                     }
-                } else {
-                    echo "<h2>Gerenciador de Dados</h2>";
-                }
-                ?>
-            </section>
+                    ?>
+                </section>
+            </div>
+
         </div>
 
-    </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="js/cep.js"></script>
+    <?php
+    } else {
+        include_once("pages/loginAdmin.php");
+    }
+    ?>
+
 </body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="js/cep.js"></script>
 
 </html>
