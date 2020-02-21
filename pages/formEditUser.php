@@ -3,31 +3,33 @@
 ?>
 <section class="container bg-branco">
     <h3 class="center">Dados do usuário</h3>
-    <form method="post" action="index.php?pag=cad">
+    <form method="post" action="admin.php?pag=editUser">
+        <input type="hidden" name="action" value="edit">
+        <input type="hidden" name="id" value="<?= $user['id_user']?>">
         <div class="form-group">
             <label>Nome</label>
-            <input type="text" class="form-control" name="nome">
+            <input type="text" class="form-control" name="nome" value="<?= $user['nome']?>">
         </div>
         <div class="form-group">
             <label>E-mail</label>
-            <input type="email" class="form-control" name="email">
+            <input type="email" class="form-control" name="email" value="<?= $user['email']?>">
         </div>
         <div class="form-group">
             <label>Telefone</label>
-            <input type="text" class="form-control" name="tel">
+            <input type="text" class="form-control" name="tel"  value="<?= $user['tel']?>">
         </div>
         <div class="form-group">
             <label>Numero</label>
-            <input type="text" class="form-control" name="numero">
+            <input type="text" class="form-control" name="numero"  value="<?= $user['numero']?>">
         </div>
         <div class="form-group">
             <label>Complemento</label>
-            <input type="text" class="form-control" name="complemento">
+            <input type="text" class="form-control" name="complemento"  value="<?= $user['complemento']?>">
         </div>
 
         <div class="form-group">
             <label>CEP</label>
-            <input type="text" class="form-control" name="cep" maxlength="9" id="cep" onblur="pesquisacep(this.value);" required>
+            <input type="text" class="form-control" name="cep" maxlength="9" id="cep" onblur="pesquisacep(this.value);"  value="<?= $user['cep']?>" required>
         </div>
         <div class="form-group">
             <label>Endereço</label>
@@ -44,15 +46,6 @@
         <div class="form-group">
             <label>Estado</label>
             <input type="text" class="form-control" name="uf" maxlength="2" id="uf">
-        </div>
-
-        <div class="form-group">
-            <label>Senha</label>
-            <input type="password" class="form-control" name="senha">
-        </div>
-        <div class="form-group">
-            <label>Confirmar senha</label>
-            <input type="password" class="form-control" name="confsenha">
         </div>
 
         <div class="form-group text-right">

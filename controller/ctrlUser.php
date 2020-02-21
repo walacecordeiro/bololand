@@ -22,6 +22,15 @@ if (!empty($_REQUEST["action"])) {
         case "getUser":
             $user = get($_GET['id']);
             break;
+       
+        case "edit":
+            if (edit()){
+                aviso("Usuario atualizado!");
+                $user = get($_POST['id']);
+            } else {
+                erro("Erro ao atualizar!");
+            }
+            break;
     }
 }
 
@@ -64,4 +73,17 @@ function get($id){
     mysqli_set_charset($conn, "utf8");
     $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
     return mysqli_fetch_array($result);
+}
+
+function edit(){
+    $sql = "update usuario set
+                nome = '$_POST[nome]',
+                email = '$_POST[email]',
+                tel = '$_POST[tel]',
+                cep = '$_POST[cep]'
+                where id_user = $_POST[id];";
+    $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
+    mysqli_set_charset($conn, "utf8");
+    $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
+    return $result;
 }

@@ -74,5 +74,5 @@ function cryptar($texto, $chave)
     $iv = openssl_random_pseudo_bytes($ivlen);
     $ciphertext_raw = openssl_encrypt($texto, $cipher, $chave, $options = OPENSSL_RAW_DATA, $iv);
     $hmac = hash_hmac('sha256', $ciphertext_raw, $chave, $as_binary = true);
-    return base64_encode($iv . $hmac . $ciphertext_raw);
+    return htmlspecialchars(base64_encode($iv . $hmac . $ciphertext_raw));
 }
