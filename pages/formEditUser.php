@@ -5,7 +5,7 @@
     <h3 class="center">Dados do usuário</h3>
     <form method="post" action="admin.php?pag=editUser">
         <input type="hidden" name="action" value="edit">
-        <input type="hidden" name="id" value="<?= $user['id_user']?>">
+        <input type="hidden" name="id_user" value="<?= $user['id_user']?>">
         <div class="form-group">
             <label>Nome</label>
             <input type="text" class="form-control" name="nome" value="<?= $user['nome']?>">
