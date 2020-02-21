@@ -18,6 +18,10 @@ if (!empty($_REQUEST["action"])) {
         case "off":
             logout();
             break;
+        
+        case "getUser":
+            $user = get($_GET['id']);
+            break;
     }
 }
 
@@ -52,4 +56,12 @@ function logout()
     session_status() !== PHP_SESSION_ACTIVE ? session_start() : "";
     session_destroy();
     header('Location: index.php');
+}
+
+function get($id){
+    $sql = "select * from usuario where id_user = $id";
+    $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
+    mysqli_set_charset($conn, "utf8");
+    $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
+    return mysqli_fetch_array($result);
 }

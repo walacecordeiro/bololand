@@ -49,7 +49,7 @@ include_once("config.php");
 
             <ul class="navbar-nav px-3">
                 <li class="nav-item text-nowrap">
-                    <a class="nav-link" href="#">Sair</a>
+                    <a class="nav-link" href="admin.php?pag=off&action=off">Sair</a>
                 </li>
             </ul>
         </nav>
@@ -95,6 +95,10 @@ include_once("config.php");
                             include("pages/formProd.php");
                         } else if ($_GET["pag"] == "repUser") {
                             include("pages/reportUser.php");
+                        } else if ($_GET["pag"] == "off") {
+                            include("controller/ctrlAdmin.php");
+                        } else if ($_GET["pag"] == "editUser") {
+                            include("pages/formEditUser.php");
                         } else{
                             echo "<h2>Gerenciador de Dados</h2>";
                         }
