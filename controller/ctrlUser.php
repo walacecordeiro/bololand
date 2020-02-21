@@ -24,6 +24,7 @@ if (!empty($_REQUEST["action"])) {
             break;
        
         case "edit":
+            pojo();
             if (edit()){
                 aviso("Usuario atualizado!");
                 $user = get($_POST['id']);
@@ -68,7 +69,7 @@ function logout()
 }
 
 function get($id){
-    $sql = "select * from usuario where id_user = $id";
+    $sql = "select * from usuario, endereco where id_user = $id";
     $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
     mysqli_set_charset($conn, "utf8");
     $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
@@ -80,6 +81,8 @@ function edit(){
                 nome = '$_POST[nome]',
                 email = '$_POST[email]',
                 tel = '$_POST[tel]',
+                numero = '$_POST[numero]',
+                complemento = '$_POST[complemento]',
                 cep = '$_POST[cep]'
                 where id_user = $_POST[id];";
     $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
@@ -87,3 +90,35 @@ function edit(){
     $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
     return $result;
 }
+
+function buscacep($cep){
+    $sqlBuscaCep = "select cep from endereco where cep = $cep";
+    $sqlCep = "insert into endereco (cep, logradouro, bairro, cidade, uf) values ('$user[cep]' , '$user[logradouro]', '$user[bairro]', '$user[cidade]', '$user[uf]')";
+     //Conecta o banco de dados
+     $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
+     mysqli_set_charset($conn, "utf8");
+     //Busca do CEP (Endereco) e guarda no $result
+     $result = mysqli_query($conn, htmlspecialchars($sqlBuscaCep)) or die(mysqli_error($conn));
+     //Se o resultado da busca do CEP for igual a 0
+     if (mysqli_num_rows($result) == 0) {
+         //Cadastro do CEP (Endereco)
+         mysqli_query($conn, htmlspecialchars($sqlCep)) or die(mysqli_error($conn));
+     }
+
+}
+
+function pojo(){
+    $user['nome'] = trim($_POST["nome"]);
+    $user['email'] = trim($_POST["email"]);
+    $user['tel'] = trim($_POST["tel"]);
+    $user['numero'] = trim($_POST["numero"]);
+    $user['complemento'] = trim($_POST["complemento"]);
+    //$user['senha'] = crypt(trim($_POST["senha"]), $email);
+    //$confsenha = trim($_POST["confsenha"]);
+    $user['cep'] = trim($_POST["cep"]);
+    $user['logradouro'] = trim($_POST["logradouro"]);
+    $user['bairro'] = trim($_POST["bairro"]);
+    $user['cidade'] = trim($_POST["cidade"]);
+    $user['uf'] = trim($_POST["uf"]);
+}
+

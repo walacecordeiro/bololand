@@ -33,19 +33,19 @@
         </div>
         <div class="form-group">
             <label>Endereço</label>
-            <input type="text" class="form-control" name="logradouro" maxlength="100" id="rua">
+            <input type="text" class="form-control" name="logradouro" maxlength="100" id="rua" value="<?= $user['logradouro']?>">
         </div>
         <div class="form-group">
             <label>Bairro</label>
-            <input type="text" class="form-control" name="bairro" maxlength="50" id="bairro">
+            <input type="text" class="form-control" name="bairro" maxlength="50" id="bairro" value="<?= $user['bairro']?>">
         </div>
         <div class="form-group">
             <label>Cidade</label>
-            <input type="text" class="form-control" name="cidade" maxlength="50" id="cidade">
+            <input type="text" class="form-control" name="cidade" maxlength="50" id="cidade" value="<?= $user['cidade']?>">
         </div>
         <div class="form-group">
             <label>Estado</label>
-            <input type="text" class="form-control" name="uf" maxlength="2" id="uf">
+            <input type="text" class="form-control" name="uf" maxlength="2" id="uf" value="<?= $user['uf']?>">
         </div>
 
         <div class="form-group text-right">
