@@ -1,8 +1,19 @@
 <?php
+require_once("dao.php");
 //Perfil do Usuario --------------------------------------
 $user = array(
+    "nome" => trim(""),
     "email" => trim(""),
-    "senha" => trim("")
+    "tel" => trim(""),
+    "numero" => trim(""),
+    "complemento" => trim(""),
+    "senha" => trim(""),
+    "confsenha" => trim(""),
+    "cep"  => trim(""),
+    "logradouro" => trim(""),
+    "bairro" => trim(""),
+    "cidade" => trim(""),
+    "uf" => trim("")
 );
 
 //Action -------------------------------------------------
@@ -32,6 +43,19 @@ if (!empty($_REQUEST["action"])) {
                 erro("Erro ao atualizar!");
             }
             break;
+        case "add":
+            pojo();
+            $erros = validar($user);
+            if ($erros == "") {
+                if (add($user)) {
+                    aviso("Usuario Cadastrado!");
+                } else {
+                    erro("Erro ao Cadastrado!");
+                }
+            } else {
+                erro($erros);
+            }
+            break;
     }
 }
 
@@ -44,7 +68,6 @@ function login($usuario)
     $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
     if (mysqli_num_rows($result) == 1) {
         //aviso("Usuario encontrado");
-
         if (session_status() !== PHP_SESSION_ACTIVE) {
             session_start();
         }
@@ -79,6 +102,7 @@ function get($id)
 
 function edit()
 {
+    buscaCep($_POST);
     $sql = "update usuario set
                 nome = '$_POST[nome]',
                 email = '$_POST[email]',
@@ -93,9 +117,9 @@ function edit()
     return $result;
 }
 
-function buscacep($cep)
+function buscaCep($user)
 {
-    $sqlBuscaCep = "select cep from endereco where cep = $cep";
+    $sqlBuscaCep = "select cep from endereco where cep = $user[cep]";
     $sqlCep = "insert into endereco (cep, logradouro, bairro, cidade, uf) values ('$user[cep]' , '$user[logradouro]', '$user[bairro]', '$user[cidade]', '$user[uf]')";
     //Conecta o banco de dados
     $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
@@ -123,4 +147,32 @@ function pojo()
     $user['bairro'] = trim(addslashes($_POST["bairro"]));
     $user['cidade'] = trim(addslashes($_POST["cidade"]));
     $user['uf'] = trim(addslashes($_POST["uf"]));
+}
+
+function add($user)
+{
+    $sqlUser = "insert into usuario (nome, email, tel, numero, complemento, senha, cep, tipo) values ('$user[nome]', '$user[email]', '$user[tel]', '$user[numero]', '$user[complemento]', md5('$user[senha]'), '$user[cep]', (select id_tipo from tipo where tipo = 'cliente'))";
+
+    buscaCep($user);
+
+    return query($sqlUser);
+}
+
+function validar($user)
+{
+    $erros = "";
+    if ($user['nome'] == "") {
+        $erros .= "Nome em branco.<br>";
+    }
+    if ($user['email'] == "") {
+        $erros .= "E-mail em branco.<br>";
+    }
+    if ($user['senha'] == "") {
+        $erros .= "Senha em branco.<br>";
+    } else if (strlen($user['senha']) < 7) {
+        $erros .= "Senha muito curta. Minimo de 8 caracteres.<br>";
+    } else if ($user['senha'] !== $user["confsenha"]) {
+        $erros .= "Senhas diferentes.<br>";
+    }
+    return $erros;
 }
