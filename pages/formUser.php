@@ -14,11 +14,15 @@ if (!empty($_POST)) {
     $bairro = trim($_POST["bairro"]);
     $cidade = trim($_POST["cidade"]);
     $uf = trim($_POST["uf"]);
+    $foto = $_FILES['foto'];
+    $novaFoto = "";
+
+    //var_dump($foto);
 
     //SQL - Comandos do Banco de dados
     $sqlCep = "insert into endereco (cep, logradouro, bairro, cidade, uf) values ('$cep' , '$logradouro', '$bairro', '$cidade', '$uf')";
 
-    $sqlUser = "insert into usuario (nome, email, tel, numero, complemento, senha, cep, tipo) values ('$nome', '$email', '$tel', '$numero', '$complemento', md5('$senha'), '$cep', (select id_tipo from tipo where tipo = 'cliente'))"; //ou apenas numero 2 ref. ao id do cliente no banco de dados
+    $sqlUser = "insert into usuario (nome, email, tel, numero, complemento, senha, cep, tipo, foto) values ('$nome', '$email', '$tel', '$numero', '$complemento', md5('$senha'), '$cep', (select id_tipo from tipo where tipo = 'cliente'), '$novaFoto')"; //ou apenas numero 2 ref. ao id do cliente no banco de dados
 
     $sqlBuscaCep = "select cep from endereco where cep = $cep";
 
@@ -37,6 +41,10 @@ if (!empty($_POST)) {
             //Cadastro do CEP (Endereco)
             mysqli_query($conn, htmlspecialchars($sqlCep)) or die(mysqli_error($conn));
         }
+
+        //Enviar Foto
+        require_once("./controller/files.php");
+        $novaFoto = upload("img/perfil/", $foto);
 
         //Cadastro do Usuario com o CEP
         $salvo = mysqli_query($conn, htmlspecialchars($sqlUser)) or die(mysqli_error($conn));
@@ -79,7 +87,13 @@ function validar($user)
 
 <section class="container bg-branco">
     <h3 class="center">Dados do usuário</h3>
-    <form method="post" action="index.php?pag=cad">
+    <form method="post" action="index.php?pag=cad" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label for="file">Fotos do Perfil</label>
+            <input type="file" class="form-control-file" id="file" name="foto">
+        </div>
+
         <div class="form-group">
             <label>Nome</label>
             <input type="text" class="form-control" name="nome">

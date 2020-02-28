@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 21-Fev-2020 às 17:34
+-- Tempo de geração: 28-Fev-2020 às 20:44
 -- Versão do servidor: 10.4.10-MariaDB
 -- versão do PHP: 7.1.33
 
@@ -101,19 +101,20 @@ CREATE TABLE `usuario` (
   `cep` varchar(9) DEFAULT NULL,
   `numero` varchar(10) DEFAULT NULL,
   `complemento` varchar(100) DEFAULT NULL,
-  `tipo` int(11) DEFAULT NULL
+  `tipo` int(11) DEFAULT NULL,
+  `ativo` tinyint(1) DEFAULT 1,
+  `foto` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` (`id_user`, `nome`, `email`, `tel`, `senha`, `cep`, `numero`, `complemento`, `tipo`) VALUES
-(1, 'Ana Silva', 'anasilva@email.com', '555-55555', '1111111111', '21230043', '34', '', NULL),
-(2, 'Maria das Silva', 'maria@email.com', '5555-55555', '40db719c907ad1017df5ea2888ad9ddf', '23520120', '32', '', NULL),
-(3, 'Maria do Bairro', 'mb@email.com', '15245201215', '989fdec2818448c05ead9b6d557277f7', '23520220', '23', '', 2),
-(4, 'Maria do Bairro', 'mb@email.com', '15245201215', '989fdec2818448c05ead9b6d557277f7', '23520220', '23', '', 2),
-(5, 'admin', 'admin@email.com', '5555-55555', 'af3e905ef7f5fd1f29100fe55858826c', '21230043', '55', '', 1);
+INSERT INTO `usuario` (`id_user`, `nome`, `email`, `tel`, `senha`, `cep`, `numero`, `complemento`, `tipo`, `ativo`, `foto`) VALUES
+(1, 'Ana Silva Cardoso', 'anasilva@email.com', '555-55555', '1111111111', '21230043', '34', '', 2, 1, NULL),
+(2, 'Maria das Silva', 'maria@email.com', '5555-55555', '40db719c907ad1017df5ea2888ad9ddf', '23520120', '32', '', 2, 1, NULL),
+(3, 'Maria do Bairro', 'mb@email.com', '15245201215', '989fdec2818448c05ead9b6d557277f7', '23520220', '23', '', 2, 0, NULL),
+(5, 'admin', 'admin@email.com', '5555-55555', 'af3e905ef7f5fd1f29100fe55858826c', '21230043', '55', '', 1, 1, NULL);
 
 --
 -- Índices para tabelas despejadas
