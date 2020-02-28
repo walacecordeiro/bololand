@@ -97,6 +97,8 @@ include_once("config.php");
                             include("pages/reportUser.php");
                         } else if ($_GET["pag"] == "off") {
                             include("controller/ctrlAdmin.php");
+                        } else if ($_GET["pag"] == "remove") {
+                            include("controller/ctrlAdmin.php");
                         } else if ($_GET["pag"] == "editUser") {
                             include("pages/formEditUser.php");
                         } else{
