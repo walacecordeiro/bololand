@@ -18,14 +18,14 @@ if (!empty($_REQUEST["action"])) {
         case "off":
             logout();
             break;
-        
+
         case "getUser":
             $user = get($_GET['id']);
             break;
-       
+
         case "edit":
             pojo();
-            if (edit()){
+            if (edit()) {
                 aviso("Usuario atualizado!");
                 $user = get($_POST['id']);
             } else {
@@ -38,7 +38,7 @@ if (!empty($_REQUEST["action"])) {
 //Functions ----------------------------------------------
 function login($usuario)
 {
-    $sql = "select id_user, nome, email from usuario where email = '$usuario[email]' and senha = md5('$usuario[senha]')";
+    $sql = "select id_user, nome, email from usuario where email = '$usuario[email]' and senha = md5('$usuario[senha]') and ativo";
     $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
     mysqli_set_charset($conn, "utf8");
     $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
@@ -68,15 +68,17 @@ function logout()
     header('Location: index.php');
 }
 
-function get($id){
-    $sql = "select * from usuario, endereco where id_user = $id";
+function get($id)
+{
+    $sql = "select * from usuario, endereco where id_user = $id and ativo";
     $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
     mysqli_set_charset($conn, "utf8");
     $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
     return mysqli_fetch_array($result);
 }
 
-function edit(){
+function edit()
+{
     $sql = "update usuario set
                 nome = '$_POST[nome]',
                 email = '$_POST[email]',
@@ -84,41 +86,41 @@ function edit(){
                 numero = '$_POST[numero]',
                 complemento = '$_POST[complemento]',
                 cep = '$_POST[cep]'
-                where id_user = $_POST[id];";
+                where id_user = $_POST[id] and ativo;";
     $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
     mysqli_set_charset($conn, "utf8");
     $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
     return $result;
 }
 
-function buscacep($cep){
+function buscacep($cep)
+{
     $sqlBuscaCep = "select cep from endereco where cep = $cep";
     $sqlCep = "insert into endereco (cep, logradouro, bairro, cidade, uf) values ('$user[cep]' , '$user[logradouro]', '$user[bairro]', '$user[cidade]', '$user[uf]')";
-     //Conecta o banco de dados
-     $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
-     mysqli_set_charset($conn, "utf8");
-     //Busca do CEP (Endereco) e guarda no $result
-     $result = mysqli_query($conn, htmlspecialchars($sqlBuscaCep)) or die(mysqli_error($conn));
-     //Se o resultado da busca do CEP for igual a 0
-     if (mysqli_num_rows($result) == 0) {
-         //Cadastro do CEP (Endereco)
-         mysqli_query($conn, htmlspecialchars($sqlCep)) or die(mysqli_error($conn));
-     }
-
+    //Conecta o banco de dados
+    $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
+    mysqli_set_charset($conn, "utf8");
+    //Busca do CEP (Endereco) e guarda no $result
+    $result = mysqli_query($conn, htmlspecialchars($sqlBuscaCep)) or die(mysqli_error($conn));
+    //Se o resultado da busca do CEP for igual a 0
+    if (mysqli_num_rows($result) == 0) {
+        //Cadastro do CEP (Endereco)
+        mysqli_query($conn, htmlspecialchars($sqlCep)) or die(mysqli_error($conn));
+    }
 }
 
-function pojo(){
-    $user['nome'] = trim($_POST["nome"]);
-    $user['email'] = trim($_POST["email"]);
-    $user['tel'] = trim($_POST["tel"]);
-    $user['numero'] = trim($_POST["numero"]);
-    $user['complemento'] = trim($_POST["complemento"]);
-    //$user['senha'] = crypt(trim($_POST["senha"]), $email);
-    //$confsenha = trim($_POST["confsenha"]);
-    $user['cep'] = trim($_POST["cep"]);
-    $user['logradouro'] = trim($_POST["logradouro"]);
-    $user['bairro'] = trim($_POST["bairro"]);
-    $user['cidade'] = trim($_POST["cidade"]);
-    $user['uf'] = trim($_POST["uf"]);
+function pojo()
+{
+    $user['nome'] = trim(addslashes($_POST["nome"]));
+    $user['email'] = trim(addslashes($_POST["email"]));
+    $user['tel'] = trim(addslashes($_POST["tel"]));
+    $user['numero'] = trim(addslashes($_POST["numero"]));
+    $user['complemento'] = trim(addslashes($_POST["complemento"]));
+    //$user['senha'] = crypt(trim(addslashes($_POST["senha"]), $email));
+    //$confsenha = trim(addslashes($_POST["confsenha"]));
+    $user['cep'] = trim(addslashes($_POST["cep"]));
+    $user['logradouro'] = trim(addslashes($_POST["logradouro"]));
+    $user['bairro'] = trim(addslashes($_POST["bairro"]));
+    $user['cidade'] = trim(addslashes($_POST["cidade"]));
+    $user['uf'] = trim(addslashes($_POST["uf"]));
 }
-

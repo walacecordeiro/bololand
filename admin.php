@@ -101,7 +101,7 @@ include_once("config.php");
                             include("controller/ctrlAdmin.php");
                         } else if ($_GET["pag"] == "editUser") {
                             include("pages/formEditUser.php");
-                        } else{
+                        } else {
                             echo "<h2>Gerenciador de Dados</h2>";
                         }
                     } else {

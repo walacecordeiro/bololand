@@ -1,4 +1,3 @@
-
 <?php
 include_once('mensagens.php');
 if (!empty($_POST)) {
@@ -25,7 +24,7 @@ if (!empty($_POST)) {
         echo "<meta http-equiv='refresh' content='2;admin.php?pag=cad'>";
     } else {
         //echo "<div class='alert alert-danger'> Erro ao salvar! </div>";
-        erro("Erro ao Salvar");    
+        erro("Erro ao Salvar");
         mysqli_close($conn);
     }
 } else {

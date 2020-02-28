@@ -1,6 +1,6 @@
 <?php
-    //include_once()
-    require_once("./controller/ctrlUser.php");
+//include_once()
+require_once("./controller/ctrlUser.php");
 ?>
 
 <section class="container bg-branco">
@@ -13,7 +13,7 @@
 
             <div class="form-group py-3">
                 <label for="e-mail">e-mail</label>
-                <input type="email" name="email" class="form-control p-2" value="<?=$user['email']?>" placeholder="Ex. paulosilva@email.com">
+                <input type="email" name="email" class="form-control p-2" value="<?= $user['email'] ?>" placeholder="Ex. paulosilva@email.com">
             </div>
 
             <div class="form-group py-3">

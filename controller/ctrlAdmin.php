@@ -21,7 +21,7 @@ if (!empty($_REQUEST["action"])) {
 
         case "remove":
             remover($_GET['id'], $_GET['status']);
-        break;
+            break;
     }
 }
 
@@ -60,7 +60,7 @@ function logout()
 
 function getAll()
 {
-    $sql = "select * from usuario, endereco where usuario.cep = endereco.cep and tipo != 1";// and ativo";
+    $sql = "select * from usuario, endereco where usuario.cep = endereco.cep and tipo != 1"; // and ativo";
     $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
     mysqli_set_charset($conn, "utf8");
     $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
@@ -81,13 +81,14 @@ function cryptar($texto, $chave)
     return htmlspecialchars(base64_encode($iv . $hmac . $ciphertext_raw));
 }
 
-function remover($id, $status){
+function remover($id, $status)
+{
     //$sql = "DELETE FROM usuario WHERE id_user = $id";
     $sql = "update usuario set ativo = !$status WHERE id_user = $id";
     $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
     mysqli_set_charset($conn, "utf8");
     $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
-    if ($result){
+    if ($result) {
         aviso("Removido!");
     } else {
         erro("Não foi possivel remover o Usuário!");
