@@ -1,6 +1,6 @@
 <?php
 
-function dao($sql)
+function query($sql)
 {
     //Conecta no banco de dados
     $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
@@ -22,4 +22,9 @@ function dao($sql)
 
     //Return os dados
     return $result;
+}
+
+function queryOne($sql)
+{
+    return mysqli_fetch_array(query($sql));
 }
