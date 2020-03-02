@@ -64,7 +64,7 @@ if (!empty($_REQUEST["action"])) {
 //Functions ----------------------------------------------
 function login($usuario)
 {
-    $sql = "select id_user, nome, email from usuario where email = '$usuario[email]' and senha = md5('$usuario[senha]') and ativo";
+    $sql = "select id_user, nome, email, foto from usuario where email = '$usuario[email]' and senha = md5('$usuario[senha]') and ativo";
     $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
     mysqli_set_charset($conn, "utf8");
     $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
@@ -90,6 +90,7 @@ function logout()
     //Ternarios
     session_status() !== PHP_SESSION_ACTIVE ? session_start() : "";
     session_destroy();
+
     header('Location: index.php');
 }
 
@@ -104,6 +105,14 @@ function get($id)
 
 function edit()
 {
+    //Enviar Foto
+    require_once("files.php");
+    if(!empty($_FILES["foto"])){
+        $novaFoto = upload("img/perfil/", $_FILES["foto"]);
+    } else {
+        $novaFoto = $user['foto'];
+    }
+    //busca do cep
     buscaCep($_POST);
     $sql = "update usuario set
                 nome = '$_POST[nome]',
@@ -111,7 +120,8 @@ function edit()
                 tel = '$_POST[tel]',
                 numero = '$_POST[numero]',
                 complemento = '$_POST[complemento]',
-                cep = '$_POST[cep]'
+                cep = '$_POST[cep]',
+                foto = '$novaFoto'
                 where id_user = $_POST[id_user] and ativo;";
     $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
     mysqli_set_charset($conn, "utf8");

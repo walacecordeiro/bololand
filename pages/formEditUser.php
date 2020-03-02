@@ -3,9 +3,15 @@ require_once("./controller/ctrlUser.php");
 ?>
 <section class="container bg-branco">
     <h3 class="center">Dados do usuário</h3>
-    <form method="post" action="admin.php?pag=editUser">
+    <form method="post" action="admin.php?pag=editUser" enctype="multipart/form-data">
         <input type="hidden" name="action" value="edit">
         <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
+
+        <div class="form-group">
+            <label for="file">Fotos do Perfil</label>
+            <input type="file" class="form-control-file" id="file" name="foto">
+        </div>
+
         <div class="form-group">
             <label>Nome</label>
             <input type="text" class="form-control" name="nome" value="<?= $user['nome'] ?>">
