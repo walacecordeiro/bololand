@@ -68,7 +68,7 @@ include_once("config.php");
 
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href=""><?= $_SESSION["user"]["nome"] ?></a>
+                            <a class="nav-link" href="index.php?pag=perfil"><?= $_SESSION["user"]["nome"] ?></a>
                         </li>
 
                         <li class="nav-item">
@@ -87,6 +87,8 @@ include_once("config.php");
                 include("pages/formUser.php");
             } else if ($_GET["pag"] == "log") {
                 include("pages/login.php");
+            } else if ($_GET["pag"] == "perfil") {
+                include("pages/perfilUser.php");
             } else {
                 include("pages/inicio.php");
             }

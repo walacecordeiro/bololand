@@ -93,7 +93,7 @@ function logout()
 
 function get($id)
 {
-    $sql = "select * from usuario, endereco where id_user = $id and ativo";
+    $sql = "select * from usuario, endereco where id_user = $id";
     $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
     mysqli_set_charset($conn, "utf8");
     $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
