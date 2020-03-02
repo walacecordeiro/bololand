@@ -13,7 +13,8 @@ $user = array(
     "logradouro" => trim(""),
     "bairro" => trim(""),
     "cidade" => trim(""),
-    "uf" => trim("")
+    "uf" => trim(""),
+    "id_user" => trim("")
 );
 
 //Action -------------------------------------------------
@@ -38,13 +39,14 @@ if (!empty($_REQUEST["action"])) {
             pojo();
             if (edit()) {
                 aviso("Usuario atualizado!");
-                $user = get($_POST['id']);
+                $user = get($_POST['id_user']);
             } else {
                 erro("Erro ao atualizar!");
             }
             break;
         case "add":
             pojo();
+            var_dump($user);
             $erros = validar($user);
             if ($erros == "") {
                 if (add($user)) {
@@ -110,7 +112,7 @@ function edit()
                 numero = '$_POST[numero]',
                 complemento = '$_POST[complemento]',
                 cep = '$_POST[cep]'
-                where id_user = $_POST[id] and ativo;";
+                where id_user = $_POST[id_user] and ativo;";
     $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
     mysqli_set_charset($conn, "utf8");
     $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
@@ -135,18 +137,23 @@ function buscaCep($user)
 
 function pojo()
 {
-    $user['nome'] = trim(addslashes($_POST["nome"]));
-    $user['email'] = trim(addslashes($_POST["email"]));
-    $user['tel'] = trim(addslashes($_POST["tel"]));
-    $user['numero'] = trim(addslashes($_POST["numero"]));
-    $user['complemento'] = trim(addslashes($_POST["complemento"]));
-    //$user['senha'] = crypt(trim(addslashes($_POST["senha"]), $email));
-    //$confsenha = trim(addslashes($_POST["confsenha"]));
-    $user['cep'] = trim(addslashes($_POST["cep"]));
-    $user['logradouro'] = trim(addslashes($_POST["logradouro"]));
-    $user['bairro'] = trim(addslashes($_POST["bairro"]));
-    $user['cidade'] = trim(addslashes($_POST["cidade"]));
-    $user['uf'] = trim(addslashes($_POST["uf"]));
+    $user['nome'] = trim($_POST["nome"]);
+    $user['email'] = trim($_POST["email"]);
+    $user['tel'] = trim($_POST["tel"]);
+    $user['numero'] = trim($_POST["numero"]);
+    $user['complemento'] = trim($_POST["complemento"]);
+    $user['cep'] = trim($_POST["cep"]);
+    $user['logradouro'] = trim($_POST["logradouro"]);
+    $user['bairro'] = trim($_POST["bairro"]);
+    $user['cidade'] = trim($_POST["cidade"]);
+    $user['uf'] = trim($_POST["uf"]);
+
+    if (!empty($_POST["senha"])) {
+        $user['senha'] = crypt(trim($_POST["senha"]), $user['email']);
+        $user['confsenha'] = trim($_POST["confsenha"]);
+    } else {
+        $user['id_user'] = trim($_POST["id_user"]);
+    }
 }
 
 function add($user)
