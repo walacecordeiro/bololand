@@ -34,7 +34,7 @@ include_once("config.php");
     if (session_status() !== PHP_SESSION_ACTIVE) {
         session_start();
     }
-    if (empty($_SESSION["admin"])) {
+    if (!empty($_SESSION["admin"])) {
     ?>
 
         <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
