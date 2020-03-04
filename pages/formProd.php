@@ -7,8 +7,25 @@ if (!empty($_POST)) {
     $valor = trim($_POST["valor"]);
     //Ternário: condição ? verdade : falso ;
     trim($_POST["ativo"]) ? $ativo = 1 : $ativo = 0;
+    $foto1 = $_FILES['foto1'];
+    $foto2 = $_FILES['foto2'];
+    $foto3 = $_FILES['foto3'];
+    $foto4 = $_FILES['foto4'];
+    $foto5 = $_FILES['foto5'];
+    $novaFoto1 = "";
+    $novaFoto2 = "";
+    $novaFoto3 = "";
+    $novaFoto4 = "";
+    $novaFoto5 = "";
 
-    $sql = "insert into produto (nome, descricao, valor, quant, ativo) values ('$nome', '$descr', $valor, $quant, $ativo)";
+    require_once("./controller/files.php");
+    $novaFoto1 = upload("img/clienteProdutos/", $foto1);
+    $novaFoto2 = upload("img/clienteProdutos/", $foto2);
+    $novaFoto3 = upload("img/clienteProdutos/", $foto3);
+    $novaFoto4 = upload("img/clienteProdutos/", $foto4);
+    $novaFoto5 = upload("img/clienteProdutos/", $foto5);
+
+    $sql = "insert into produto (nome, descricao, valor, quant, ativo, foto1, foto2, foto3, foto4, foto5) values ('$nome', '$descr', $valor, $quant, $ativo, '$novaFoto1', '$novaFoto2', '$novaFoto3', '$novaFoto4', '$novaFoto5')";
 
     //Conecta o banco de dados
     $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
@@ -33,7 +50,17 @@ if (!empty($_POST)) {
 
     <section class="container bg-branco">
         <h3 class="center">Dados do produto</h3>
-        <form method="post" action="admin.php?pag=cad">
+        <form method="post" action="admin.php?pag=cad" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="file">Fotos do Produto</label>
+                <input type="file" class="form-control-file" id="file" name="foto1">
+                <input type="file" class="form-control-file" id="file" name="foto2">
+                <input type="file" class="form-control-file" id="file" name="foto3">
+                <input type="file" class="form-control-file" id="file" name="foto4">
+                <input type="file" class="form-control-file" id="file" name="foto5">
+            </div>
+
             <div class="form-group">
                 <label>Nome</label>
                 <input type="text" class="form-control" name="nome" required>
