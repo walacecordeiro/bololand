@@ -87,5 +87,4 @@ function pojo()
     $prod['descricao'] = trim($_POST["descricao"]);
     $prod['quant'] = trim($_POST["quant"]);
     $prod['valor'] = trim($_POST["valor"]);
-
 }

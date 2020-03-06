@@ -44,7 +44,7 @@ require_once("./controller/ctrlAdmin.php");
                     </a>
                 </td>
                 <td>
-                    <a href='admin.php?pag=remove&action=remove&id=" . $i['id_produto'] . "&status=$i[ativo]' onclick=\"return confirm('Apagar registro do produto $i[nome]?')\">
+                    <a href='admin.php?pag=removeProd&action=removeProd&id=" . $i['id_produto'] . "&status=$i[ativo]' onclick=\"return confirm('Apagar registro do produto $i[nome]?')\">
                     <i class='material-icons'>delete_forever</i>
                     </a>
                 </td>

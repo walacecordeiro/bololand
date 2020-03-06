@@ -101,6 +101,8 @@ include_once("config.php");
                             include("controller/ctrlAdmin.php");
                         } else if ($_GET["pag"] == "remove") {
                             include("controller/ctrlAdmin.php");
+                        } else if ($_GET["pag"] == "removeProd") {
+                            include("controller/ctrlAdmin.php");
                         } else if ($_GET["pag"] == "editUser") {
                             include("pages/formEditUser.php");
                         } else if ($_GET["pag"] == "editProd") {
