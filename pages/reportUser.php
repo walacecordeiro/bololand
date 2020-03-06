@@ -7,7 +7,7 @@ require_once("./controller/ctrlAdmin.php");
             <th>id</th>
             <th>nome</th>
             <th>email</th>
-            <th>tel.</th>
+            <th>tel</th>
             <th>cep</th>
             <th>endereço</th>
             <th>ativo</th>

@@ -70,6 +70,35 @@ function getAll()
     return $result;
 }
 
+function getAllProd()
+{
+    $sql = "select * from produto where ativo = 1"; // and ativo";
+    $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
+    mysqli_set_charset($conn, "utf8");
+    $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
+
+    mysqli_close($conn);
+
+    return $result;
+}
+
+function removerProd($id, $status){
+    //$sql = "DELETE FROM produto WHERE id_produto = $id";
+    $sql = "update produto set ativo = !$status WHERE id_produto = $id";
+    $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
+    mysqli_set_charset($conn, "utf8");
+    $result = mysqli_query($conn, htmlspecialchars($sql)) or die(mysqli_error($conn));
+    if ($result) {
+        aviso("Produto Removido!");
+    } else {
+        erro("Não foi possivel remover o Produto!");
+    }
+
+    mysqli_close($conn);
+
+    header('Location: admin.php?pag=repProd');
+}
+
 
 function cryptar($texto, $chave)
 {
@@ -81,8 +110,7 @@ function cryptar($texto, $chave)
     return htmlspecialchars(base64_encode($iv . $hmac . $ciphertext_raw));
 }
 
-function remover($id, $status)
-{
+function remover($id, $status){
     //$sql = "DELETE FROM usuario WHERE id_user = $id";
     $sql = "update usuario set ativo = !$status WHERE id_user = $id";
     $conn = mysqli_connect(LOCAL, USER, PASS, BASE);

@@ -94,8 +94,7 @@ function logout()
     header('Location: index.php');
 }
 
-function get($id)
-{
+function get($id){
     $sql = "select * from usuario, endereco where id_user = $id";
     $conn = mysqli_connect(LOCAL, USER, PASS, BASE);
     mysqli_set_charset($conn, "utf8");

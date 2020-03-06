@@ -75,7 +75,7 @@ include_once("config.php");
                         </h6>
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="#" onclick="side()">
+                                <a class="nav-link" href="admin.php?pag=repProd" onclick="side()">
                                     Produtos
                                 </a>
                             </li>
@@ -93,6 +93,8 @@ include_once("config.php");
                     if (!empty($_GET)) {
                         if ($_GET["pag"] == "cad") {
                             include("pages/formProd.php");
+                        } else if ($_GET["pag"] == "repProd") {
+                            include("pages/reportProd.php");
                         } else if ($_GET["pag"] == "repUser") {
                             include("pages/reportUser.php");
                         } else if ($_GET["pag"] == "off") {
@@ -101,6 +103,8 @@ include_once("config.php");
                             include("controller/ctrlAdmin.php");
                         } else if ($_GET["pag"] == "editUser") {
                             include("pages/formEditUser.php");
+                        } else if ($_GET["pag"] == "editProd") {
+                            include("pages/formEditProd.php");
                         } else {
                             echo "<h2>Gerenciador de Dados</h2>";
                         }
