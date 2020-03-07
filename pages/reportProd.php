@@ -33,11 +33,12 @@ require_once("./controller/ctrlAdmin.php");
                 <td>$i[quant]</td>
                 <td>$i[valor]</td>
                 <td>" . ($i['ativo'] ? 'Sim' : 'Não') . "</td>
-                <td>$i[foto1]</td>
-                <td>$i[foto2]</td>
-                <td>$i[foto3]</td>
-                <td>$i[foto4]</td>
-                <td>$i[foto5]</td>
+                <td><img src='img/clienteProdutos/$i[foto1]' style=width:100px></td>
+                <td><img src='img/clienteProdutos/$i[foto2]' style=width:100px></td>
+                <td><img src='img/clienteProdutos/$i[foto3]' style=width:100px></td>
+                <td><img src='img/clienteProdutos/$i[foto4]' style=width:100px></td>
+                <td><img src='img/clienteProdutos/$i[foto5]' style=width:100px></td>
+                
                 <td>
                     <a href='admin.php?pag=editProd&action=getProd&id=" . $i['id_produto'] . "'>
                         <i class='material-icons'>edit</i>
